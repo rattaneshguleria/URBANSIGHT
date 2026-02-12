@@ -1,37 +1,44 @@
-# UrbanSight – AI Surveillance System
+🔹 Project Title
 
-UrbanSight is an AI-powered smart city surveillance web application that analyzes CCTV footage using computer vision and deep learning.
+AI-Powered Smart Surveillance and Interaction System
 
-It is designed to demonstrate how AI can help in crowd monitoring, object detection, and public safety analysis.
+🔹 Project Overview
 
----
+This project is an intelligent surveillance and interaction system developed using Flask, real-time communication, and machine learning. The application monitors data in real time, analyzes it using ML models, and responds instantly through an integrated backend system.
 
-## 🚀 Features
+🔹 Key Features
 
-- Upload CCTV or surveillance videos
-- AI-based object detection using YOLOv8
-- Detects people, vehicles, and objects
-- Real-time processing (server-side)
-- Dashboard view for analysis results
-- Ethics & Privacy awareness page
+Real-time communication using Flask-SocketIO
 
----
+Intelligent surveillance and monitoring module
 
-## 🛠 Tech Stack
+Machine learning-based decision making
 
-### Backend
-- Python
-- Flask
-- YOLOv8 (Ultralytics)
-- OpenCV
-- NumPy
+Interactive chatbot for user communication
 
-### Frontend
-- HTML
-- CSS
-- JavaScript
+Modular backend architecture for scalability
 
----
+Cross-origin support using Flask-CORS
 
-## 📁 Project Structure
+🔹 Technologies Used
 
+Python
+
+Flask
+
+Flask-SocketIO
+
+Eventlet
+
+Machine Learning (scikit-learn / TensorFlow)
+
+REST APIs
+
+🔹 Project Structure
+backend/
+├── app.py
+├── surveillance.py
+├── chatbot.py
+├── ml_models.py
+├── detector.py
+├── requirements.txt

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyze Video - UrbanSight</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-shield-alt"></i>
+            <h1>UrbanSight</h1>
+        </div>
+        <div class="nav-links">
+            <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="upload.html" class="active"><i class="fas fa-upload"></i> Analyze Video</a>
+            <a href="ethics.html"><i class="fas fa-user-shield"></i> Ethics</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="upload-header">
+            <h2><i class="fas fa-video"></i> Video Analysis</h2>
+            <p>Upload CCTV footage for AI-powered surveillance analysis</p>
+        </div>
+
+        <div class="upload-container">
+            <div class="upload-card">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                
+                <h3>Upload Surveillance Video</h3>
+                <p>Supported formats: MP4, AVI, MOV, MKV</p>
+                <p>Max size: 100MB</p>
+                
+                <div class="upload-area" id="dropArea">
+                    <input type="file" id="videoInput" accept="video/*" hidden>
+                    <div class="drop-content" onclick="document.getElementById('videoInput').click()">
+                        <i class="fas fa-file-video"></i>
+                        <p>Click to select or drag & drop video file</p>
+                        <small>MP4, AVI, MOV, MKV supported</small>
+                    </div>
+                </div>
+                
+                <div class="file-info" id="fileInfo">
+                    <!-- File info will appear here -->
+                </div>
+                
+                <div class="privacy-options">
+                    <h4><i class="fas fa-user-shield"></i> Privacy Options</h4>
+                    <div class="option-row">
+                        <label class="checkbox">
+                            <input type="checkbox" id="privacyMode" checked>
+                            <span class="checkmark"></span>
+                            Enable Privacy Mode (Blur faces)
+                        </label>
+                        <small>Automatically blur faces to protect privacy</small>
+                    </div>
+                    <div class="option-row">
+                        <label class="checkbox">
+                            <input type="checkbox" id="storeVideo" checked>
+                            <span class="checkmark"></span>
+                            Store processed video (24 hours)
+                        </label>
+                        <small>Temporary storage for analysis verification</small>
+                    </div>
+                </div>
+                
+                <div class="analysis-options">
+                    <h4><i class="fas fa-search"></i> Detection Features</h4>
+                    <div class="feature-grid">
+                        <label class="feature-option active">
+                            <i class="fas fa-users"></i>
+                            <span>Crowd Detection</span>
+                        </label>
+                        <label class="feature-option active">
+                            <i class="fas fa-running"></i>
+                            <span>Suspicious Activity</span>
+                        </label>
+                        <label class="feature-option active">
+                            <i class="fas fa-suitcase"></i>
+                            <span>Unattended Objects</span>
+                        </label>
+                        <label class="feature-option active">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Movement Analysis</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary btn-large" onclick="analyzeVideo()" id="analyzeBtn">
+                    <i class="fas fa-play"></i> Start AI Analysis
+                </button>
+                
+                <div class="demo-section">
+                    <p>Don't have a video? Try our demo:</p>
+                    <button class="btn btn-outline" onclick="useDemoVideo()">
+                        <i class="fas fa-magic"></i> Use Demo Video
+                    </button>
+                </div>
+            </div>
+            
+            <div class="results-card">
+                <h3><i class="fas fa-chart-bar"></i> Analysis Results</h3>
+                <div class="results-container" id="resultsContainer">
+                    <div class="results-placeholder">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Analysis Results Will Appear Here</h4>
+                        <p>Upload a video and click "Start AI Analysis" to begin</p>
+                    </div>
+                </div>
+                
+                <div class="progress-container" id="progressContainer" style="display: none;">
+                    <h4>Analysis Progress</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">0%</div>
+                    <div class="progress-details" id="progressDetails">
+                        Initializing AI models...
+                    </div>
+                </div>
+                
+                <div class="alert-summary" id="alertSummary" style="display: none;">
+                    <!-- Alert summary will appear here -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="back-to-dashboard">
+            <a href="dashboard.html" class="btn">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Drag and drop functionality
+        const dropArea = document.getElementById('dropArea');
+        const videoInput = document.getElementById('videoInput');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            dropArea.classList.add('highlight');
+        }
+        
+        function unhighlight() {
+            dropArea.classList.remove('highlight');
+        }
+        
+        dropArea.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            videoInput.files = files;
+            displayFileInfo(files[0]);
+        }
+        
+        videoInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                displayFileInfo(this.files[0]);
+            }
+        });
+        
+        function displayFileInfo(file) {
+            const fileInfo = document.getElementById('fileInfo');
+            const fileSize = (file.size / (1024 * 1024)).toFixed(2);
+            
+            fileInfo.innerHTML = `
+                <div class="file-details">
+                    <i class="fas fa-file-video"></i>
+                    <div>
+                        <strong>${file.name}</strong>
+                        <small>${fileSize} MB • ${file.type}</small>
+                    </div>
+                    <button class="btn-remove" onclick="clearFile()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+        }
+        
+        function clearFile() {
+            videoInput.value = '';
+            document.getElementById('fileInfo').innerHTML = '';
+        }
+        
+        function useDemoVideo() {
+            // Use a sample video URL for demo
+            const demoUrl = 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4';
+            
+            fetch(demoUrl)
+                .then(response => response.blob())
+                .then(blob => {
+                    const file = new File([blob], 'demo_video.mp4', { type: 'video/mp4' });
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    videoInput.files = dataTransfer.files;
+                    displayFileInfo(file);
+                    
+                    alert('Demo video loaded! Click "Start AI Analysis" to proceed.');
+                })
+                .catch(error => {
+                    alert('Using fallback demo video');
+                    // Use a local demo video if available
+                    document.getElementById('fileInfo').innerHTML = `
+                        <div class="file-details">
+                            <i class="fas fa-file-video"></i>
+                            <div>
+                                <strong>demo_surveillance.mp4</strong>
+                                <small>Sample CCTV footage for demonstration</small>
+                            </div>
+                        </div>
+                    `;
+                });
+        }
+    </script>
+</body>
+</html>

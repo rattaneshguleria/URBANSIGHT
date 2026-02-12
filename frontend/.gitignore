@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+uploads/
+.venv/
+venv/
+.env
+.vscode/
+yolov8n.pt

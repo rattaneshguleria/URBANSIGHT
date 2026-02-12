@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanSight - Smart City Safety Monitor</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-shield-alt"></i>
+            <h1>UrbanSight</h1>
+            <span class="tagline">Smart City Safety Monitor</span>
+        </div>
+        <div class="nav-links">
+            <a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="upload.html"><i class="fas fa-upload"></i> Analyze Video</a>
+            <a href="ethics.html"><i class="fas fa-user-shield"></i> Ethics & Privacy</a>
+        </div>
+        <div class="system-status">
+            <span class="status-dot active"></span>
+            <span>AI System: ONLINE</span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Main Dashboard -->
+        <div class="dashboard-header">
+            <h2><i class="fas fa-tachometer-alt"></i> AI Surveillance Dashboard</h2>
+            <div class="header-stats">
+                <div class="stat-card mini">
+                    <i class="fas fa-video"></i>
+                    <span id="activeCameras">0</span>
+                    <small>Active Feeds</small>
+                </div>
+                <div class="stat-card mini">
+                    <i class="fas fa-bell"></i>
+                    <span id="todayAlerts">0</span>
+                    <small>Today's Alerts</small>
+                </div>
+                <div class="stat-card mini">
+                    <i class="fas fa-user-friends"></i>
+                    <span id="totalAnalyses">0</span>
+                    <small>Total Analyses</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert Panel -->
+        <div class="alert-panel">
+            <div class="panel-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Live Alerts</h3>
+                <button class="btn btn-small" onclick="refreshAlerts()">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+            </div>
+            <div class="alerts-container" id="alertsContainer">
+                <!-- Alerts will be loaded here -->
+                <div class="alert-placeholder">
+                    <i class="fas fa-check-circle"></i>
+                    <p>No active alerts. System is monitoring.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts and Statistics -->
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h4><i class="fas fa-chart-line"></i> Crowd Density Trends</h4>
+                <div class="chart-container">
+                    <canvas id="crowdChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-card">
+                <h4><i class="fas fa-chart-pie"></i> Alert Distribution</h4>
+                <div class="chart-container">
+                    <canvas id="alertChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-card">
+                <h4><i class="fas fa-chart-bar"></i> Activity Timeline</h4>
+                <div class="chart-container">
+                    <canvas id="timelineChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Information -->
+        <div class="info-grid">
+            <div class="info-card">
+                <h4><i class="fas fa-brain"></i> AI Features Active</h4>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle success"></i> Crowd Detection</li>
+                    <li><i class="fas fa-check-circle success"></i> Suspicious Activity</li>
+                    <li><i class="fas fa-check-circle success"></i> Unattended Objects</li>
+                    <li><i class="fas fa-check-circle success"></i> Privacy Mode</li>
+                    <li><i class="fas fa-check-circle success"></i> Real-time Alerts</li>
+                </ul>
+            </div>
+            
+            <div class="info-card">
+                <h4><i class="fas fa-history"></i> Recent Activity</h4>
+                <div class="activity-list" id="activityList">
+                    <!-- Activities will be loaded here -->
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <h4><i class="fas fa-cogs"></i> System Status</h4>
+                <div class="status-list">
+                    <div class="status-item">
+                        <span>AI Models</span>
+                        <span class="status-badge success">Operational</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Video Processing</span>
+                        <span class="status-badge success">Active</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Privacy Mode</span>
+                        <span class="status-badge success">Enabled</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Alert System</span>
+                        <span class="status-badge success">Running</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+            <div class="action-buttons">
+                <button class="btn action-btn" onclick="window.location.href='upload.html'">
+                    <i class="fas fa-upload"></i> Analyze New Video
+                </button>
+                <button class="btn action-btn" onclick="runDemoAnalysis()">
+                    <i class="fas fa-play-circle"></i> Run Demo Analysis
+                </button>
+                <button class="btn action-btn" onclick="togglePrivacyMode()">
+                    <i class="fas fa-user-shield"></i> Toggle Privacy Mode
+                </button>
+                <button class="btn action-btn" onclick="viewAllAlerts()">
+                    <i class="fas fa-list-alt"></i> View All Alerts
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>UrbanSight</h4>
+                <p>AI-assisted urban surveillance with privacy-first design</p>
+                <p>IIT Roorkee Changeathon Project</p>
+            </div>
+            <div class="footer-section">
+                <h4>Features</h4>
+                <ul>
+                    <li>Real-time Monitoring</li>
+                    <li>Privacy Protection</li>
+                    <li>AI-Powered Alerts</li>
+                    <li>Human-in-the-loop</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Ethics First</h4>
+                <p>No facial recognition</p>
+                <p>Automatic face blurring</p>
+                <p>Temporary data storage</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 UrbanSight - IIT Roorkee Changeathon</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDashboardData();
+            initializeCharts();
+            setupWebSocket();
+            startLiveUpdates();
+        });
+    </script>
+</body>
+</html>

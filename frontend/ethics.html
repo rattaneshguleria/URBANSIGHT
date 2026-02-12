@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethics & Privacy - UrbanSight</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-shield-alt"></i>
+            <h1>UrbanSight</h1>
+        </div>
+        <div class="nav-links">
+            <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="upload.html"><i class="fas fa-upload"></i> Analyze Video</a>
+            <a href="ethics.html" class="active"><i class="fas fa-user-shield"></i> Ethics</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="ethics-header">
+            <h2><i class="fas fa-handshake"></i> Ethics & Privacy Commitment</h2>
+            <p class="tagline">Surveillance with responsibility, AI with accountability</p>
+        </div>
+        
+        <div class="ethics-principles">
+            <div class="principle-card">
+                <div class="principle-icon">
+                    <i class="fas fa-ban"></i>
+                </div>
+                <h3>No Facial Recognition</h3>
+                <p>UrbanSight does NOT perform facial recognition. We deliberately avoid identifying individuals to prevent mass surveillance risks.</p>
+                <ul class="principle-list">
+                    <li><i class="fas fa-check"></i> No identity tracking</li>
+                    <li><i class="fas fa-check"></i> No biometric data collection</li>
+                    <li><i class="fas fa-check"></i> No person identification</li>
+                </ul>
+            </div>
+            
+            <div class="principle-card">
+                <div class="principle-icon">
+                    <i class="fas fa-user-secret"></i>
+                </div>
+                <h3>Automatic Face Blurring</h3>
+                <p>All faces in processed videos are automatically blurred using AI to protect individual privacy while allowing activity analysis.</p>
+                <div class="demo-comparison">
+                    <div class="demo-item">
+                        <div class="demo-label">Original</div>
+                        <div class="demo-image blurred-bg"></div>
+                    </div>
+                    <div class="demo-item">
+                        <div class="demo-label">Protected</div>
+                        <div class="demo-image privacy-bg"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="principle-card">
+                <div class="principle-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Temporary Data Storage</h3>
+                <p>All uploaded videos and analysis results are automatically deleted after 24 hours. We don't maintain permanent surveillance databases.</p>
+                <div class="storage-timeline">
+                    <div class="timeline-item">
+                        <div class="time-point">0h</div>
+                        <div class="time-label">Video uploaded</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time-point">1h</div>
+                        <div class="time-label">Analysis completed</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time-point">24h</div>
+                        <div class="time-label">Data auto-deleted</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="principle-card">
+                <div class="principle-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <h3>Human-in-the-Loop</h3>
+                <p>AI only flags potential incidents. All final decisions and responses require human operator verification and approval.</p>
+                <div class="workflow">
+                    <div class="workflow-step">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Detection</span>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">
+                        <i class="fas fa-flag"></i>
+                        <span>Alert Raised</span>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">
+                        <i class="fas fa-user"></i>
+                        <span>Human Review</span>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Action Taken</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="principle-card">
+                <div class="principle-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h3>Transparent AI</h3>
+                <p>We explain how our AI makes decisions. No black-box algorithms. Operators can understand why alerts were generated.</p>
+                <div class="transparency-metrics">
+                    <div class="metric">
+                        <div class="metric-value">100%</div>
+                        <div class="metric-label">Explainable Alerts</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">0</div>
+                        <div class="metric-label">Hidden Algorithms</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Yes</div>
+                        <div class="metric-label">Source Available</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="principle-card">
+                <div class="principle-icon">
+                    <i class="fas fa-gavel"></i>
+                </div>
+                <h3>Legal & Ethical Compliance</h3>
+                <p>Designed to comply with data protection regulations and ethical AI guidelines from development to deployment.</p>
+                <div class="compliance-badges">
+                    <span class="badge">GDPR Compliant</span>
+                    <span class="badge">Ethical AI</span>
+                    <span class="badge">Privacy by Design</span>
+                    <span class="badge">Transparent</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="ethics-faq">
+            <h3><i class="fas fa-question-circle"></i> Frequently Asked Questions</h3>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>Does UrbanSight store personal data?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>No. UrbanSight does not store personal identifiers. Videos are processed with face blurring and all data is deleted within 24 hours.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>Can this system be used for mass surveillance?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>UrbanSight is designed as an assistance tool for security operators, not a mass surveillance system. It requires human oversight for all actions and does not track individuals.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>What about false alarms?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Our system uses threshold-based alerts that require human verification. We prioritize reducing false positives through contextual analysis and operator review.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>Is UrbanSight replacing human security guards?</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely not. UrbanSight is designed to assist human operators by filtering large volumes of footage and highlighting potential incidents, allowing guards to focus on critical situations.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="ethics-commitment">
+            <div class="commitment-content">
+                <h3><i class="fas fa-handshake"></i> Our Ethical Commitment</h3>
+                <p>UrbanSight is built on the principle that technology should enhance security without compromising fundamental rights. We believe in surveillance that protects people, not surveillance that watches people.</p>
+                
+                <div class="commitment-points">
+                    <p><i class="fas fa-check"></i> Privacy is not an add-on — it's built into our core</p>
+                    <p><i class="fas fa-check"></i> Transparency in how our AI works</p>
+                    <p><i class="fas fa-check"></i> Human oversight for all critical decisions</p>
+                    <p><i class="fas fa-check"></i> Temporary data retention only</p>
+                    <p><i class="fas fa-check"></i> No facial recognition or biometric tracking</p>
+                </div>
+                
+                <div class="team-pledge">
+                    <h4>Team UrbanSight Pledge</h4>
+                    <blockquote>
+                        "We commit to developing AI surveillance tools that respect individual privacy, require human judgment, and enhance public safety through responsible innovation."
+                    </blockquote>
+                    <p class="signature">— UrbanSight Team, IIT Roorkee Changeathon</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="back-to-dashboard">
+            <a href="dashboard.html" class="btn">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                answer.classList.toggle('active');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+    </script>
+</body>
+</html>
